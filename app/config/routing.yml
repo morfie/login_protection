@@ -1,0 +1,4 @@
+docler_user:
+    resource: "@DoclerUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
