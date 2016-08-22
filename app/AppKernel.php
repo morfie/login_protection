@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Bafford\PasswordStrengthBundle\BaffordPasswordStrengthBundle(),
             new Docler\UserBundle\DoclerUserBundle(),
+            new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
