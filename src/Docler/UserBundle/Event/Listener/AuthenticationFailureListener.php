@@ -2,7 +2,7 @@
 
 namespace Docler\UserBundle\Event\Listener;
 
-use Docler\UserBundle\BruteforceDefense\Counter;
+use Docler\UserBundle\BruteforceDefense\BruteforceCounter;
 use Docler\UserBundle\Exception\InvalidCaptchaException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 class AuthenticationFailureListener {
 
     /**
-     * @var Counter
+     * @var BruteforceCounter
      */
     private $counter;
 
@@ -23,10 +23,10 @@ class AuthenticationFailureListener {
     private $requestStack;
 
     /**
-     * @param Counter      $counter
-     * @param RequestStack $requestStack
+     * @param BruteforceCounter $counter
+     * @param RequestStack      $requestStack
      */
-    public function __construct(Counter $counter, RequestStack $requestStack) {
+    public function __construct(BruteforceCounter $counter, RequestStack $requestStack) {
         $this->counter = $counter;
         $this->requestStack = $requestStack;
     }

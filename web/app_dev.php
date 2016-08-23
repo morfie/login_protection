@@ -18,6 +18,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
+if (preg_match('/\.(?:png|jpg|jpeg|gif|ico)$/', $_SERVER["REQUEST_URI"])) {
+    return false; // serve the requested resource as-is.
+}
+
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */

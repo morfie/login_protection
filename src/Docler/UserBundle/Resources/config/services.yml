@@ -1,6 +1,6 @@
 services:
     docler_user.bruteforce_defense.counter:
-        class: 'Docler\UserBundle\BruteforceDefense\Counter'
+        class: 'Docler\UserBundle\BruteforceDefense\BruteforceCounter'
 
     docler_user.authentication.failure.listener:
         class: 'Docler\UserBundle\Event\Listener\AuthenticationFailureListener'
@@ -8,3 +8,10 @@ services:
             - '@docler_user.bruteforce_defense.counter'
             - '@request_stack'
         tags: [ { name: kernel.event_listener, event: security.authentication.failure, method: onFail } ]
+
+    security.authentication.listener.form:
+        class: 'Docler\UserBundle\Event\Listener\UsernamePasswordFormAuthenticationListener'
+        parent: security.authentication.listener.abstract
+        abstract: true
+        calls:
+            - [ 'setBruteforceCounter', ['@docler_user.bruteforce_defense.counter'] ]
