@@ -4,10 +4,15 @@ namespace Docler\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
-{
-    public function indexAction()
-    {
+/**
+ * home controller
+ */
+class DefaultController extends Controller {
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction() {
         return $this->render('DoclerUserBundle:Default:index.html.twig');
     }
 }

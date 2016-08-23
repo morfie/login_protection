@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+/**
+ * security controller
+ */
 class SecurityController extends \FOS\UserBundle\Controller\SecurityController {
 
     /**

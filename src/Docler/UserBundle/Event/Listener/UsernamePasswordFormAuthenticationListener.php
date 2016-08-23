@@ -22,12 +22,36 @@ use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-    class UsernamePasswordFormAuthenticationListener extends AbstractAuthenticationListener {
+/**
+ * login checker
+ */
+class UsernamePasswordFormAuthenticationListener extends AbstractAuthenticationListener {
 
+    /**
+     * @var NULL|CsrfTokenManagerInterface
+     */
     private $csrfTokenManager;
 
+    /**
+     * @var BruteforceCounter
+     */
     private $bruteforceCounter;
 
+    /**
+     * UsernamePasswordFormAuthenticationListener constructor.
+     *
+     * @param TokenStorageInterface                  $tokenStorage
+     * @param AuthenticationManagerInterface         $authenticationManager
+     * @param SessionAuthenticationStrategyInterface $sessionStrategy
+     * @param HttpUtils                              $httpUtils
+     * @param string                                 $providerKey
+     * @param AuthenticationSuccessHandlerInterface  $successHandler
+     * @param AuthenticationFailureHandlerInterface  $failureHandler
+     * @param array                                  $options
+     * @param LoggerInterface|NULL                   $logger
+     * @param EventDispatcherInterface|NULL          $dispatcher
+     * @param CsrfTokenManagerInterface|NULL         $csrfTokenManager
+     */
     public function __construct(
         TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager,
         SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $providerKey,
@@ -46,11 +70,14 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
+    /**
+     * @param BruteforceCounter $bruteforceCounter
+     */
     public function setBruteforceCounter(BruteforceCounter $bruteforceCounter) {
         $this->bruteforceCounter = $bruteforceCounter;
     }
 
-        /**
+    /**
      * {@inheritdoc}
      */
     protected function requiresAuthentication(Request $request) {
