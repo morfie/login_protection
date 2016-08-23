@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -61,11 +61,12 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
+cspoo_swiftmailer_mailgun:
+    key: "%mailgun_key%"
+    domain: "%mailgun_domain%"
+
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: "mailgun"
     spool:     { type: memory }
 
 fos_user:
@@ -75,5 +76,9 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+            from_email:
+                address: postmaster@fsr.hu
+                sender_name: tester
+
         form:
             type: FOS\UserBundle\Form\Type\RegistrationFormType

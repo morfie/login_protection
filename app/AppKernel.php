@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Bafford\PasswordStrengthBundle\BaffordPasswordStrengthBundle(),
             new Docler\UserBundle\DoclerUserBundle(),
             new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
