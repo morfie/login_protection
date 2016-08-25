@@ -4,9 +4,72 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "361b7c020706b7c21dd3571b6a16b9c2",
-    "content-hash": "938a77f79bb47656bc80447c0e515036",
+    "hash": "e669b0d1701ffa038e4b1f1cb40f5a5f",
+    "content-hash": "507d2d2b323a0278b657412467639863",
     "packages": [
+        {
+            "name": "alcaeus/mongo-php-adapter",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alcaeus/mongo-php-adapter.git",
+                "reference": "db7ef240fc9de81cd093d4d7e401a30b79023196"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alcaeus/mongo-php-adapter/zipball/db7ef240fc9de81cd093d4d7e401a30b79023196",
+                "reference": "db7ef240fc9de81cd093d4d7e401a30b79023196",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "mongodb/mongodb": "^1.0.1",
+                "php": "^5.5 || ^7.0"
+            },
+            "provide": {
+                "ext-mongo": "1.6.13"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mongo": "lib/Mongo"
+                },
+                "psr-4": {
+                    "Alcaeus\\MongoDbAdapter\\": "lib/Alcaeus/MongoDbAdapter"
+                },
+                "files": [
+                    "lib/Mongo/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "alcaeus",
+                    "email": "alcaeus@alcaeus.org"
+                },
+                {
+                    "name": "Olivier Lechevalier",
+                    "email": "olivier.lechevalier@gmail.com"
+                }
+            ],
+            "description": "Adapter to provide ext-mongo interface on top of mongo-php-libary",
+            "keywords": [
+                "database",
+                "mongodb"
+            ],
+            "time": "2016-07-03 16:16:40"
+        },
         {
             "name": "clue/stream-filter",
             "version": "v1.3.0",
@@ -804,6 +867,237 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "doctrine/mongodb",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/mongodb.git",
+                "reference": "b4eb8683d66d44de4e9e4e974149bdce327dc818"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/b4eb8683d66d44de4e9e4e974149bdce327dc818",
+                "reference": "b4eb8683d66d44de4e9e4e974149bdce327dc818",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.2",
+                "ext-mongo": "^1.5",
+                "php": "^5.5 || ^7.0"
+            },
+            "require-dev": {
+                "jmikola/geojson": "^1.0",
+                "phpunit/phpunit": "~4.8|~5.0"
+            },
+            "suggest": {
+                "jmikola/geojson": "Support GeoJSON geometry objects in 2dsphere queries"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\MongoDB": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com"
+                },
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com"
+                },
+                {
+                    "name": "Maciej Malarz",
+                    "email": "malarzm@gmail.com"
+                },
+                {
+                    "name": "Andreas Braun",
+                    "email": "alcaeus@alcaeus.org"
+                }
+            ],
+            "description": "Doctrine MongoDB Abstraction Layer",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database",
+                "mongodb",
+                "persistence"
+            ],
+            "time": "2016-03-19 18:45:48"
+        },
+        {
+            "name": "doctrine/mongodb-odm",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/mongodb-odm.git",
+                "reference": "183ee0076aaad4950c0a07c7dd5bcbb0f379cc60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/183ee0076aaad4950c0a07c7dd5bcbb0f379cc60",
+                "reference": "183ee0076aaad4950c0a07c7dd5bcbb0f379cc60",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "~1.0",
+                "doctrine/cache": "~1.0",
+                "doctrine/collections": "~1.1",
+                "doctrine/common": "~2.4",
+                "doctrine/inflector": "~1.0",
+                "doctrine/instantiator": "~1.0.1",
+                "doctrine/mongodb": "~1.2",
+                "php": ">=5.3.2",
+                "symfony/console": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8|~5.0",
+                "symfony/yaml": "~2.3|~3.0"
+            },
+            "suggest": {
+                "symfony/yaml": "Enables the YAML metadata mapping driver"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\ODM\\MongoDB": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com"
+                },
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com"
+                },
+                {
+                    "name": "Maciej Malarz",
+                    "email": "malarzm@gmail.com"
+                },
+                {
+                    "name": "Andreas Braun",
+                    "email": "alcaeus@alcaeus.org"
+                }
+            ],
+            "description": "Doctrine MongoDB Object Document Mapper",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database",
+                "mongodb",
+                "odm",
+                "persistence"
+            ],
+            "time": "2016-07-27 13:22:24"
+        },
+        {
+            "name": "doctrine/mongodb-odm-bundle",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
+                "reference": "5ecd5d553816a258bb5860a5a2eddb67b4446f75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/5ecd5d553816a258bb5860a5a2eddb67b4446f75",
+                "reference": "5ecd5d553816a258bb5860a5a2eddb67b4446f75",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/mongodb-odm": "^1.0",
+                "php": "^5.5 || ^7.0",
+                "psr/log": "^1.0",
+                "symfony/config": "^2.7 || ^3.0",
+                "symfony/console": "^2.7 || ^3.0",
+                "symfony/dependency-injection": "^2.7 || ^3.0",
+                "symfony/doctrine-bridge": "^2.7 || ^3.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0",
+                "symfony/options-resolver": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/data-fixtures": "@dev",
+                "symfony/form": "^2.7 || ^3.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0",
+                "symfony/yaml": "^2.7 || ^3.0"
+            },
+            "suggest": {
+                "doctrine/data-fixtures": "Load data fixtures"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\MongoDBBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris@symfony.com"
+                },
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com"
+                }
+            ],
+            "description": "Symfony2 Doctrine MongoDB Bundle",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "mongodb",
+                "persistence",
+                "symfony"
+            ],
+            "time": "2016-04-10 19:04:45"
+        },
+        {
             "name": "doctrine/orm",
             "version": "v2.5.4",
             "source": {
@@ -1298,6 +1592,61 @@
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
             "time": "2016-08-10 16:58:18"
+        },
+        {
+            "name": "mongodb/mongodb",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mongodb/mongo-php-library.git",
+                "reference": "faf8a1d86b5c10684ef91fa6c81475b0c7f95240"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/faf8a1d86b5c10684ef91fa6c81475b0c7f95240",
+                "reference": "faf8a1d86b5c10684ef91fa6c81475b0c7f95240",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mongodb": "^1.1.0",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MongoDB\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Hannes Magnusson",
+                    "email": "bjori@mongodb.com"
+                },
+                {
+                    "name": "Derick Rethans",
+                    "email": "github@derickrethans.nl"
+                }
+            ],
+            "description": "MongoDB driver library",
+            "homepage": "https://jira.mongodb.org/browse/PHPLIB",
+            "keywords": [
+                "database",
+                "driver",
+                "mongodb",
+                "persistence"
+            ],
+            "time": "2016-03-30 19:10:28"
         },
         {
             "name": "monolog/monolog",
@@ -2056,6 +2405,82 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-11-07 08:07:40"
+        },
+        {
+            "name": "solution/mongo-odm-aggregation-bundle",
+            "version": "v0.1.1",
+            "target-dir": "Solution/MongoAggregationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/f1nder/SolutionMongoAggregationBundle.git",
+                "reference": "6b2a64430a567f97a2ec68b8b45da6e196742deb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/f1nder/SolutionMongoAggregationBundle/zipball/6b2a64430a567f97a2ec68b8b45da6e196742deb",
+                "reference": "6b2a64430a567f97a2ec68b8b45da6e196742deb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/mongodb-odm-bundle": "~3.0",
+                "php": ">=5.4.0",
+                "solution/pipeline-builder": "~0.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Solution\\MongoAggregationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Moroz",
+                    "email": "netstroix@gmail.com",
+                    "homepage": "http://comingsoon.com"
+                }
+            ],
+            "description": "This Bundle integrates mongo aggregation queries into you Symfony2 project.",
+            "keywords": [
+                "aggregation",
+                "mongo",
+                "pipeline",
+                "query"
+            ],
+            "time": "2016-04-22 07:39:15"
+        },
+        {
+            "name": "solution/pipeline-builder",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/f1nder/SolutionPipelineBuilder.git",
+                "reference": "aca3cdfb2262fb3ceea82310b903c908c4c9b983"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/f1nder/SolutionPipelineBuilder/zipball/aca3cdfb2262fb3ceea82310b903c908c4c9b983",
+                "reference": "aca3cdfb2262fb3ceea82310b903c908c4c9b983",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Aleksandr Moroz",
+                    "email": "netstroix@gmail.com"
+                }
+            ],
+            "description": "Build pipeline for Mongo Aggregation Query",
+            "time": "2014-04-09 13:17:40"
         },
         {
             "name": "swiftmailer/swiftmailer",

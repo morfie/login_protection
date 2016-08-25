@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Docler\UserBundle\DoclerUserBundle(),
             new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
+            new \Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new \Solution\MongoAggregationBundle\SolutionMongoAggregationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

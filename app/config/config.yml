@@ -82,3 +82,13 @@ fos_user:
 
         form:
             type: FOS\UserBundle\Form\Type\RegistrationFormType
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: "%mongodb_server%"
+            options: {}
+    default_database: brute_force
+    document_managers:
+        default:
+            auto_mapping: true

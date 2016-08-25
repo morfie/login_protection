@@ -3,6 +3,7 @@
 namespace Docler\UserBundle\Event\Listener;
 
 use Docler\UserBundle\BruteforceDefense\BruteforceCounter;
+use Docler\UserBundle\BruteforceDefense\Descriptor\RequestUserIdentifierWrapper;
 use Docler\UserBundle\Exception\InvalidCaptchaException;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
@@ -100,19 +101,14 @@ class UsernamePasswordFormAuthenticationListener extends AbstractAuthenticationL
             }
         }
 
-        if ($this->options['post_only']) {
-            $username = trim(ParameterBagUtils::getParameterBagValue($request->request, $this->options['username_parameter']));
-            $password = ParameterBagUtils::getParameterBagValue($request->request, $this->options['password_parameter']);
-        } else {
-            $username = trim(ParameterBagUtils::getRequestParameterValue($request, $this->options['username_parameter']));
-            $password = ParameterBagUtils::getRequestParameterValue($request, $this->options['password_parameter']);
-        }
+        $username = trim(ParameterBagUtils::getRequestParameterValue($request, $this->options['username_parameter']));
+        $password = ParameterBagUtils::getRequestParameterValue($request, $this->options['password_parameter']);
 
         if (strlen($username) > Security::MAX_USERNAME_LENGTH) {
             throw new BadCredentialsException('Invalid username.');
         }
 
-        if ($this->bruteforceCounter->isBlocked($request)) {
+        if ($this->bruteforceCounter->isBlocked(RequestUserIdentifierWrapper::createByRequest($request))) {
             $userCaptcha = ParameterBagUtils::getRequestParameterValue($request, '_captcha');
             $dummy = $request->getSession()->get('gcb__captcha');
             $sessionCaptcha = isset($dummy['phrase']) ? $dummy['phrase'] : NULL;

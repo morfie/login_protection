@@ -1,6 +1,14 @@
 services:
     docler_user.bruteforce_defense.counter:
         class: 'Docler\UserBundle\BruteforceDefense\BruteforceCounter'
+        arguments:
+            - '@docler_user.bruteforce_defense.mongo_storage'
+
+    docler_user.bruteforce_defense.mongo_storage:
+        class: 'Docler\UserBundle\BruteforceDefense\Storage\MongoStorage'
+        arguments:
+            - '@doctrine_mongodb.odm.default_document_manager'
+            - '@doctrine_mongodb.odm.default_aggregation_query'
 
     docler_user.authentication.failure.listener:
         class: 'Docler\UserBundle\Event\Listener\AuthenticationFailureListener'

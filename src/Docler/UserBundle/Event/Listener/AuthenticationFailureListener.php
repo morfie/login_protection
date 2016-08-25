@@ -3,6 +3,7 @@
 namespace Docler\UserBundle\Event\Listener;
 
 use Docler\UserBundle\BruteforceDefense\BruteforceCounter;
+use Docler\UserBundle\BruteforceDefense\Descriptor\RequestUserIdentifierWrapper;
 use Docler\UserBundle\Exception\InvalidCaptchaException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
@@ -36,7 +37,7 @@ class AuthenticationFailureListener {
      */
     public function onFail(AuthenticationFailureEvent $event) {
         if (!$event->getAuthenticationException() instanceof InvalidCaptchaException) {
-            $this->counter->increase($this->requestStack->getMasterRequest());
+            $this->counter->increase(RequestUserIdentifierWrapper::createByRequest($this->requestStack->getMasterRequest()));
         }
     }
 }

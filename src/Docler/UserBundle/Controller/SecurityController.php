@@ -2,6 +2,7 @@
 
 namespace Docler\UserBundle\Controller;
 
+use Docler\UserBundle\BruteforceDefense\Descriptor\RequestUserIdentifierWrapper;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -29,7 +30,7 @@ class SecurityController extends \FOS\UserBundle\Controller\SecurityController {
         ;
 
         $request = $this->getRequest();
-        if ($request && $this->getBruteforceCounter()->isBlocked($request)) {
+        if ($request && $this->getBruteforceCounter()->isBlocked(RequestUserIdentifierWrapper::createByRequest($request))) {
             $builder->add('_captcha', CaptchaType::class);
         }
 
