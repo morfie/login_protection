@@ -9,36 +9,36 @@ namespace Docler\UserBundle\BruteforceDefense\Storage;
 interface StorageInterface {
 
     /**
-     * @param $username
-     * @param $ipv4Address
+     * @param string $username
+     * @param string $ipv4Address
      */
-    public function add($username, $ipv4Address);
+    public function add(string $username, string $ipv4Address);
 
     /**
-     * @param $username
+     * @param string $username
      *
      * @return int
      */
-    public function countByUsername($username): int;
+    public function countByUsername(string $username): int;
 
     /**
-     * @param $ipv4Address
+     * @param string $ipv4Address
      *
      * @return int
      */
-    public function countByIpv4Address($ipv4Address): int;
+    public function countByIpv4Address(string $ipv4Address): int;
 
     /**
-     * @param $ipv4Address
+     * @param string $ipv4Address
      *
      * @return int
      */
-    public function countByIpv4AddressPer24($ipv4Address): int;
+    public function countByIpv4AddressPer24(string $ipv4Address): int;
 
     /**
-     * @param $ipv4Address
+     * @param string $ipv4Address
      *
      * @return int
      */
-    public function countByIpv4AddressPer16($ipv4Address): int;
+    public function countByIpv4AddressPer16(string $ipv4Address): int;
 }

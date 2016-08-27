@@ -4,7 +4,6 @@ namespace Docler\UserBundle\BruteforceDefense\Storage;
 
 use Docler\UserBundle\Document\LoginFailLogEntry;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Solution\MongoAggregation\Pipeline\Operators\Expr;
 use Solution\MongoAggregationBundle\AggregateQuery\AggregationQueryBuilder;
 
 /**
@@ -31,67 +30,39 @@ class MongoStorage implements StorageInterface {
     }
 
     /**
-     * @param $username
-     * @param $ipv4Address
+     * {@inheritDoc}
      */
-    public function add($username, $ipv4Address) {
+    public function add(string $username, string $ipv4Address) {
         $logEntry = $this->createNewEntry($username, $ipv4Address);
         $this->persist($logEntry);
     }
 
     /**
-     * @param $username
-     *
-     * @return int
+     * {@inheritDoc}
      */
-    public function countByUsername($username): int {
-//        $collection = $this->documentManager->getDocumentCollection('DoclerUserBundle:LoginFailLogEntry');
-//        $pipeline[] = [
-//            '$match' => [ 'userName' => '/tes.*/' ],
-//            '$group' => [
-//                '_id' => '_id',
-//                'count' => ['$sum' => 1]
-//            ],
-//        ];
-//
-//        $groups = $collection->aggregate($pipeline);
-//        var_dump(iterator_to_array($groups));die;
-//        return 1;
-        $expr = new Expr();
-        $aq = $this->aggregationQueryBuilder->getCollection('DoclerUserBundle:LoginFailLogEntry')->createAggregateQuery()
-            ->group(['_id' => '_id', 'count' => $expr->sum(1)])
-            ->match(['userName'=>'morfie@fsr.hu'])
-        ;
-        $result = $aq->getQuery()->aggregate();
-        var_dump($result);die;
+    public function countByUsername(string $username): int {
+        return $this->countByFieldExpression('userName', $username);
     }
 
     /**
-     * @param $ipv4Address
-     *
-     * @return int
+     * {@inheritDoc}
      */
-    public function countByIpv4Address($ipv4Address): int {
-        return 1;
+    public function countByIpv4Address(string $ipv4Address): int {
+        return $this->countByFieldExpression('ipv4Address', $ipv4Address);
     }
 
     /**
-     * @param $ipv4Address
-     *
-     * @return int
+     * {@inheritDoc}
      */
-    public function countByIpv4AddressPer24($ipv4Address): int {
-        // db.failed_logins.aggregate(    [ {$match: {"name": /tes.*/}},     { $group: { "_id": "_id", "count": { $sum: 1 } } }    ] );
-        return 1;
+    public function countByIpv4AddressPer24(string $ipv4Address): int {
+        return $this->countByFieldExpression('ipv4Address', $this->subnetIpRegexp($ipv4Address, 3));
     }
 
     /**
-     * @param $ipv4Address
-     *
-     * @return int
+     * {@inheritDoc}
      */
-    public function countByIpv4AddressPer16($ipv4Address): int {
-        return 1;
+    public function countByIpv4AddressPer16(string $ipv4Address): int {
+        return $this->countByFieldExpression('ipv4Address', $this->subnetIpRegexp($ipv4Address, 2));
     }
 
     /**
@@ -115,5 +86,35 @@ class MongoStorage implements StorageInterface {
         $dm = $this->documentManager;
         $dm->persist($logEntry);
         $dm->flush();
+    }
+
+    /**
+     * @param string $field
+     * @param mixed  $expression
+     *
+     * @return int
+     */
+    protected function countByFieldExpression(string $field, $expression): int {
+        $result = $this->documentManager->createQueryBuilder(LoginFailLogEntry::class)
+            ->group([], ['count' => 0])
+            ->reduce('function (obj, prev) { prev.count++; }')
+            ->field($field)->equals($expression)
+            ->getQuery()
+            ->execute();
+
+        return (int) $result->getSingleResult()['count'];
+    }
+
+    /**
+     * @param string $ipv4Address
+     * @param int    $range
+     *
+     * @return \MongoRegex
+     */
+    protected function subnetIpRegexp(string $ipv4Address, int $range): \MongoRegex {
+        $ipPrefix = explode('.', $ipv4Address);
+        $ipPrefix = implode('.', array_slice($ipPrefix, 0, $range)) . '.';
+
+        return new \MongoRegex(sprintf('/^%s/', $ipPrefix));
     }
 }
