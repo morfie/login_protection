@@ -3,8 +3,8 @@
 namespace Docler\UserBundle\BruteforceDefense\Storage;
 
 use Docler\UserBundle\Document\LoginFailLogEntry;
+use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Solution\MongoAggregationBundle\AggregateQuery\AggregationQueryBuilder;
 
 /**
  * mongo storage
@@ -17,16 +17,10 @@ class MongoStorage implements StorageInterface {
     private $documentManager;
 
     /**
-     * @var AggregationQueryBuilder
-     */
-    private $aggregationQueryBuilder;
-
-    /**
      * MongoStorage constructor.
      */
-    public function __construct(DocumentManager $documentManager, AggregationQueryBuilder $aggregationQueryBuilder) {
-        $this->documentManager = $documentManager;
-        $this->aggregationQueryBuilder = $aggregationQueryBuilder;
+    public function __construct(ManagerRegistry $managerRegistry){
+        $this->documentManager = $managerRegistry->getManager();
     }
 
     /**

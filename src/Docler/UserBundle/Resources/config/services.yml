@@ -7,8 +7,7 @@ services:
     docler_user.bruteforce_defense.mongo_storage:
         class: 'Docler\UserBundle\BruteforceDefense\Storage\MongoStorage'
         arguments:
-            - '@doctrine_mongodb.odm.default_document_manager'
-            - '@doctrine_mongodb.odm.default_aggregation_query'
+            - '@doctrine_mongodb'
 
     docler_user.authentication.failure.listener:
         class: 'Docler\UserBundle\Event\Listener\AuthenticationFailureListener'
