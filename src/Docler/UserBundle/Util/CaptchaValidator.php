@@ -19,6 +19,6 @@ class CaptchaValidator {
         $userCaptcha = ParameterBagUtils::getRequestParameterValue($request, '_captcha');
         $dummy = $request->getSession()->get('gcb__captcha');
         $sessionCaptcha = isset($dummy['phrase']) ? $dummy['phrase'] : NULL;
-        return $userCaptcha === $sessionCaptcha;
+        return $sessionCaptcha !== NULL && $userCaptcha === $sessionCaptcha;
     }
 }
