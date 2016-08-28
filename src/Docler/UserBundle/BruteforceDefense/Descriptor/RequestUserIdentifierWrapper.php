@@ -36,7 +36,7 @@ class RequestUserIdentifierWrapper implements UserIdentifierDescriptor {
         }
 
         $session = $this->request->getSession();
-        return null === $session ? '' : $session->get(Security::LAST_USERNAME);
+        return null === $session ? '' : $session->get(Security::LAST_USERNAME, '');
     }
 
     /**
