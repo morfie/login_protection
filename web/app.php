@@ -2,6 +2,10 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
+if (preg_match('/\.(?:png|jpg|jpeg|gif|ico)$/', $_SERVER["REQUEST_URI"])) {
+    return false; // serve the requested resource as-is.
+}
+
 /**
  * @var Composer\Autoload\ClassLoader
  */
