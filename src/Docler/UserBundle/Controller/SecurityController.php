@@ -50,6 +50,6 @@ class SecurityController extends \FOS\UserBundle\Controller\SecurityController {
      * @return null|\Symfony\Component\HttpFoundation\Request
      */
     protected function getRequest() {
-        return $this->container->get('request_stack')->getMasterRequest();
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

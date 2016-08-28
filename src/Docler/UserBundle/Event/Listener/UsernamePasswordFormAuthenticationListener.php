@@ -4,6 +4,7 @@ namespace Docler\UserBundle\Event\Listener;
 
 use Docler\UserBundle\BruteforceDefense\BruteforceCounter;
 use Docler\UserBundle\BruteforceDefense\Descriptor\RequestUserIdentifierWrapper;
+use Docler\UserBundle\Util\CaptchaValidator;
 use Docler\UserBundle\Exception\InvalidCaptchaException;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
@@ -108,13 +109,11 @@ class UsernamePasswordFormAuthenticationListener extends AbstractAuthenticationL
             throw new BadCredentialsException('Invalid username.');
         }
 
-        if ($this->bruteforceCounter->isBlocked(RequestUserIdentifierWrapper::createByRequest($request))) {
-            $userCaptcha = ParameterBagUtils::getRequestParameterValue($request, '_captcha');
-            $dummy = $request->getSession()->get('gcb__captcha');
-            $sessionCaptcha = isset($dummy['phrase']) ? $dummy['phrase'] : NULL;
-            if ($userCaptcha !== $sessionCaptcha) {
-                throw new InvalidCaptchaException('Captcha is invalid');
-            }
+        if (
+            $this->bruteforceCounter->isBlocked(RequestUserIdentifierWrapper::createByRequest($request)) &&
+            ! CaptchaValidator::isValid($request)
+        ) {
+            throw new InvalidCaptchaException('Captcha is invalid');
         }
 
         $request->getSession()->set(Security::LAST_USERNAME, $username);

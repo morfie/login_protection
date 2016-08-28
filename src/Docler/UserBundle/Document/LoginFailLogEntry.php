@@ -29,7 +29,7 @@ class LoginFailLogEntry {
 
     /**
      * @MongoDB\Field(type="date")
-     * @MongoDB\Index(expireAfterSeconds=300)
+     * @MongoDB\Index(expireAfterSeconds=3600)
      */
     protected $createdAt;
 

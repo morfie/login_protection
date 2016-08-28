@@ -3,6 +3,7 @@
 namespace Docler\UserBundle\BruteforceDefense\Descriptor;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\ParameterBagUtils;
 
 /**
@@ -28,7 +29,14 @@ class RequestUserIdentifierWrapper implements UserIdentifierDescriptor {
      * @return string
      */
     public function getUsername(): string {
-        return trim(ParameterBagUtils::getRequestParameterValue($this->request, '_username'));
+        $username = trim(ParameterBagUtils::getRequestParameterValue($this->request, '_username'));
+
+        if ($username) {
+            return $username;
+        }
+
+        $session = $this->request->getSession();
+        return null === $session ? '' : $session->get(Security::LAST_USERNAME);
     }
 
     /**
